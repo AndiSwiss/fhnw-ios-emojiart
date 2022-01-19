@@ -3,8 +3,11 @@ import Foundation
 struct EmojiArtModel: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
+    var elapsedTime: Int
 
-    init() { }
+    init() {
+        elapsedTime = 0
+    }
 
     init?(json: Data?) {
         if let json = json, let newEmojiArt = try? JSONDecoder().decode(EmojiArtModel.self, from: json) {

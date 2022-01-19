@@ -18,6 +18,7 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
     private var emojiArtModelSink: AnyCancellable?
     @Published private(set) var backgroundImage: UIImage?
     var emojis: [EmojiArtModel.Emoji] { emojiArtModel.emojis }
+    var elapsedTime: Int
 
     var backgroundURL: URL? {
         get {
@@ -32,6 +33,10 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
 
     init(id: UUID = UUID()) {
         self.id = id
+        // need to temporarily initialize 'elapsedTime', because if I try to do it after getting the
+        // emojiArtModel, there will be the following error:
+        //      self' used in property access '$emojiArtModel' before all stored properties are initialized
+        elapsedTime = 0
         let userDefaultsKey = "EmojiArtDocumentViewModel.\(id.uuidString)"
         let emojiArtJson = UserDefaults.standard.data(forKey: userDefaultsKey)
         emojiArtModel = EmojiArtModel(json: emojiArtJson) ?? EmojiArtModel()
@@ -39,6 +44,7 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
             print("JSON: \(emojiArtModel.json?.utf8 ?? "nil")")
             UserDefaults.standard.set(emojiArtModel.json, forKey: userDefaultsKey)
         }
+        elapsedTime = emojiArtModel.elapsedTime
         fetchBackgroundImageData()
     }
     
@@ -61,6 +67,22 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
                     self.backgroundImage = fetchedImage
                 }
         }
+    }
+
+    // MARK: - Elapsed time
+    var subscription: AnyCancellable?
+
+    func startTimer() {
+        subscription = Timer
+                .publish(every: 1.0, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    self.elapsedTime += 1; self.emojiArtModel.elapsedTime = self.elapsedTime
+                }
+    }
+
+    func cancelTimer() {
+        subscription?.cancel()
     }
 }
 
