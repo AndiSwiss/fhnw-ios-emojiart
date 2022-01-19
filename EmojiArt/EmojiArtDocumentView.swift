@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EmojiArtDocumentView: View {
-    
+
     @ObservedObject var document: EmojiArtDocumentViewModel
     @State private var chosenPalette: String
     @State private var isPastingExplanationPresented = false
@@ -14,7 +14,7 @@ struct EmojiArtDocumentView: View {
     private var isLoading: Bool {
         document.backgroundImage == nil && document.backgroundURL != nil
     }
-    
+
     var body: some View {
         VStack {
             createPalette()
@@ -23,13 +23,20 @@ struct EmojiArtDocumentView: View {
                     createBackground(geometry: geometry)
                     createEmojiLayer(geometry: geometry)
                 }
-                .gesture(doubleTapGesture(in: geometry))
+                    .gesture(doubleTapGesture(in: geometry))
             }
-            .gesture(panGesture())
-            .gesture(zoomGesture())
-            .clipped()
+                .gesture(panGesture())
+                .gesture(zoomGesture())
+                .clipped()
         }
         .toolbar {
+            // show elapsed time
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Image(systemName: "timer").imageScale(.large) //Icon timer
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Text("\(document.elapsedTime)\(" s")")
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     if let url = UIPasteboard.general.url {
@@ -40,13 +47,19 @@ struct EmojiArtDocumentView: View {
                 } label: {
                     Image(systemName: "doc.on.clipboard").imageScale(.large)
                 }
-                .alert(isPresented: $isPastingExplanationPresented) {
-                    Alert(title: Text("Paste Background Image"), message: Text("Copy the URL of an image to set it as background image"))
-                }
+                    .alert(isPresented: $isPastingExplanationPresented) {
+                        Alert(title: Text("Paste Background Image"), message: Text("Copy the URL of an image to set it as background image"))
+                    }
             }
         }
+            .onAppear {
+                document.startTimer()
+            }
+            .onDisappear {
+                document.cancelTimer()
+            }
     }
-    
+
     private func createPalette() -> some View {
         HStack {
             PaletteChooser(document: document, chosenPalette: $chosenPalette)
@@ -61,7 +74,7 @@ struct EmojiArtDocumentView: View {
             }
         }.padding(.horizontal)
     }
-    
+
     private func createBackground(geometry: GeometryProxy) -> some View {
         return Color.white.overlay(
             Group {
@@ -94,7 +107,7 @@ struct EmojiArtDocumentView: View {
             }
         }
     }
-    
+
     private func drop(providers: [NSItemProvider], location: CGPoint, geometry: GeometryProxy) -> Bool {
         var isDropHandled = providers.loadObjects(ofType: URL.self) { url in
             document.backgroundURL = url
@@ -107,7 +120,7 @@ struct EmojiArtDocumentView: View {
         }
         return isDropHandled
     }
-    
+
     private func font(for emoji: EmojiArtModel.Emoji) -> Font {
         let fontSize = emoji.fontSize * zoomScale
         return Font.system(size: fontSize)
@@ -180,7 +193,7 @@ struct EmojiArtDocumentView: View {
             y: (canvasCoordinate.y - center.y - panOffset.height) / zoomScale
         )
     }
-    
+
     // MARK: - Drawing constants
     private let defaultEmojiSize: CGFloat = 40
 }
