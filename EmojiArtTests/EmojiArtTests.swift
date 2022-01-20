@@ -21,6 +21,16 @@ class EmojiArtTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+        /* Some examples:
+            XCTAssertFalse(testee.defaultPalette.isEmpty)
+            XCTAssertNotNil(actualDocument)
+            XCTAssertEqual(expectedDocument, actualDocument)
+            XCTAssertGreaterThan(0, testee.defaultPalette.count)
+            XCTAssertNoThrow(testee.addEmoji("", toPalette: testee.defaultPalette))
+
+         */
+        XCTAssertFalse(false)
     }
 
     func testPerformanceExample() throws {
