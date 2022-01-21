@@ -21,6 +21,8 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
     }
     var elapsedTime: Int
 
+
+    // MARK: - Computed Properties
     var backgroundURL: URL? {
         get {
             emojiArtModel.backgroundURL
@@ -46,10 +48,19 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
         }
     }
 
+    var opacity: Double {
+        get {
+            emojiArtModel.backgroundColor.a
+        }
+        set {
+            emojiArtModel.backgroundColor.a = newValue
+        }
+    }
+
     // MARK: - Init
     init(id: UUID = UUID()) {
         self.id = id
-        // need to temporarily initialize 'elapsedTime', because if I try to do it after getting the
+        // We need to temporarily initialize 'elapsedTime', because if we try to do it after getting the
         // emojiArtModel, there will be the following error:
         //      self' used in property access '$emojiArtModel' before all stored properties are initialized
         elapsedTime = 0

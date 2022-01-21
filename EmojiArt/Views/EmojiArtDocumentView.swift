@@ -89,14 +89,19 @@ struct EmojiArtDocumentView: View {
     }
 
     private func createBackground(geometry: GeometryProxy) -> some View {
-        Color(document.backgroundColor).overlay(
-                    Group {
-                        if let image = document.backgroundImage {
-                            Image(uiImage: image)
-                                .scaleEffect(zoomScale)
-                                .position(toCanvasCoordinate(from: CGPoint(x: 0, y: 0), in: geometry))
-                        }
-                    }
+        // First, paint white (then opacity of backgroundColor works as expected!)
+        Color.white.overlay(
+                    // Then, paint the backgroundColor
+                    Color(document.backgroundColor).overlay(
+                            // Lastly, paint the backgroundImage
+                            Group {
+                                if let image = document.backgroundImage {
+                                    Image(uiImage: image)
+                                        .scaleEffect(zoomScale)
+                                        .position(toCanvasCoordinate(from: CGPoint(x: 0, y: 0), in: geometry))
+                                }
+                            }
+                    )
             )
             .edgesIgnoringSafeArea([.horizontal, .bottom])
             .onDrop(of: [.url, .plainText, .image], isTargeted: nil) { providers, location in
