@@ -5,6 +5,7 @@ struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocumentViewModel
     @State private var chosenPalette: String
     @State private var isPastingExplanationPresented = false
+    @State private var isColorPickerEditorPresented = false
 
     init(document: EmojiArtDocumentViewModel) {
         self.document = document
@@ -37,6 +38,18 @@ struct EmojiArtDocumentView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Text("\(document.elapsedTime)\(" s")")
             }
+            // color picker
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isColorPickerEditorPresented = true
+                } label: {
+                    Image(systemName: "paintbrush.fill").imageScale(.large)
+                }
+                    .sheet(isPresented: $isColorPickerEditorPresented) {
+                        EmojiArtColorPicker(isPresented: $isColorPickerEditorPresented, document: document)
+                    }
+            }
+            // icon for pasting image via URL
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     if let url = UIPasteboard.general.url {
@@ -76,18 +89,23 @@ struct EmojiArtDocumentView: View {
     }
 
     private func createBackground(geometry: GeometryProxy) -> some View {
-        return Color.white.overlay(
-            Group {
-                if let image =  document.backgroundImage {
-                    Image(uiImage: image)
-                        .scaleEffect(zoomScale)
-                        .position(toCanvasCoordinate(from: CGPoint(x: 0, y: 0), in: geometry))
-                }
-            }
-        )
-            .edgesIgnoringSafeArea([.horizontal,.bottom])
+        // First, paint white (then opacity of backgroundColor works as expected!)
+        Color.white.overlay(
+                    // Then, paint the backgroundColor
+                    Color(document.backgroundColor).overlay(
+                            // Lastly, paint the backgroundImage
+                            Group {
+                                if let image = document.backgroundImage {
+                                    Image(uiImage: image)
+                                        .scaleEffect(zoomScale)
+                                        .position(toCanvasCoordinate(from: CGPoint(x: 0, y: 0), in: geometry))
+                                }
+                            }
+                    )
+            )
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
             .onDrop(of: [.url, .plainText, .image], isTargeted: nil) { providers, location in
-                return drop(providers: providers, location: location, geometry: geometry)
+                drop(providers: providers, location: location, geometry: geometry)
             }
             .onReceive(document.$backgroundImage) { backgroundImage in
                 zoomToFit(backgroundImage: backgroundImage, in: geometry)

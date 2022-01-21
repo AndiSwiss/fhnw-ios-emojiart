@@ -4,9 +4,12 @@ struct EmojiArtModel: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
     var elapsedTime: Int
+    var backgroundColor: ColorRGBA
+
 
     init() {
         elapsedTime = 0
+        backgroundColor = ColorRGBA.white()
     }
 
     init?(json: Data?) {
@@ -34,7 +37,7 @@ struct EmojiArtModel: Codable {
     }
 
     var json: Data? {
-        return try? JSONEncoder().encode(self)
+        try? JSONEncoder().encode(self)
     }
     
     private var uniqueEmojiId = 0
