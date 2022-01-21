@@ -99,6 +99,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		605DE130279B279300CC0F0E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				272A6FB4AF01F43BF71386D1 /* ColorRGBA.swift */,
+				DEF3E526272AF08800A93527 /* EmojiArtModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		605DE131279B27E300CC0F0E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8F5A643274C360C00C4358E /* EditableText.swift */,
+				272A6FBBB3B536833FBD1372 /* EmojiArtColorPicker.swift */,
+				F8F5A63F274AC15200C4358E /* EmojiArtDocumentChooser.swift */,
+				DEF3E524272AF06100A93527 /* EmojiArtDocumentView.swift */,
+				272A6A77AE2CCAC75F2884C1 /* EmojiArtWallView.swift */,
+				F8032AEE27462993004B6C35 /* PaletteChooser.swift */,
+				F811DC532749565A002299B8 /* PaletteEditor.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		605DE132279B282400CC0F0E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DEF3E522272AF04B00A93527 /* EmojiArtDocumentViewModel.swift */,
+				F8032AF027463308004B6C35 /* EmojiArtDocumentViewModel+Palette.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		605DE133279B289A00CC0F0E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DEF3E520272AEFBA00A93527 /* EmojiArtExtensions.swift */,
+				F8629480274ABD7A00508286 /* EmojiArtDocumentStore.swift */,
+				272A6B0D029D8AA380E376B5 /* UIColor+asColorRGBA.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		DEF3E4EA272AEFAB00A93527 = {
 			isa = PBXGroup;
 			children = (
@@ -122,24 +164,14 @@
 		DEF3E4F5272AEFAB00A93527 /* EmojiArt */ = {
 			isa = PBXGroup;
 			children = (
-				DEF3E526272AF08800A93527 /* EmojiArtModel.swift */,
-				DEF3E524272AF06100A93527 /* EmojiArtDocumentView.swift */,
-				DEF3E522272AF04B00A93527 /* EmojiArtDocumentViewModel.swift */,
-				F8032AF027463308004B6C35 /* EmojiArtDocumentViewModel+Palette.swift */,
-				DEF3E520272AEFBA00A93527 /* EmojiArtExtensions.swift */,
+				605DE133279B289A00CC0F0E /* Helpers */,
+				605DE130279B279300CC0F0E /* Models */,
+				605DE131279B27E300CC0F0E /* Views */,
+				605DE132279B282400CC0F0E /* ViewModels */,
 				DEF3E4F6272AEFAB00A93527 /* EmojiArtApp.swift */,
 				DEF3E4FA272AEFAE00A93527 /* Assets.xcassets */,
 				DEF3E4FC272AEFAE00A93527 /* Preview Content */,
-				F8032AEE27462993004B6C35 /* PaletteChooser.swift */,
-				F811DC532749565A002299B8 /* PaletteEditor.swift */,
-				F8629480274ABD7A00508286 /* EmojiArtDocumentStore.swift */,
-				F8F5A63F274AC15200C4358E /* EmojiArtDocumentChooser.swift */,
-				F8F5A643274C360C00C4358E /* EditableText.swift */,
 				272A62372DCDF1C19A97698F /* Playground.swift */,
-				272A6A77AE2CCAC75F2884C1 /* EmojiArtWallView.swift */,
-				272A6FBBB3B536833FBD1372 /* EmojiArtColorPicker.swift */,
-				272A6FB4AF01F43BF71386D1 /* ColorRGBA.swift */,
-				272A6B0D029D8AA380E376B5 /* UIColor+asColorRGBA.swift */,
 			);
 			path = EmojiArt;
 			sourceTree = "<group>";
