@@ -1,15 +1,15 @@
-import SwiftUI
+import Foundation
 
 struct EmojiArtModel: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
     var elapsedTime: Int
-    var backgroundColor: Color
+    var backgroundColor: ColorRGBA
 
 
     init() {
         elapsedTime = 0
-        backgroundColor = Color.white
+        backgroundColor = ColorRGBA.white()
     }
 
     init?(json: Data?) {
@@ -47,19 +47,25 @@ struct EmojiArtModel: Codable {
         emojis.append(Emoji(text: text, x: x, y: y, size: size, id: uniqueEmojiId))
     }
 
-    // MARK: - Special methods because of use of Color from SwiftUI
 
-    // Since I use UIColor in this model for the background-color (from SwiftUI),
+
+    // Since we use UIColor in this model for the background-color (from SwiftUI),
     // an additional init was required.
     // Otherwise, the following error occurs:
     // 'Type 'EmojiArtModel' does not conform to protocol 'Decodable'
-    init(from decoder: Decoder) throws {
-        elapsedTime = 0
-        backgroundColor = Color.white
-    }
-
-    // Needed, because otherwise, the following error occurs:
-    // Type 'EmojiArtModel' does not conform to protocol 'Encodable'
-    func encode(to encoder: Encoder) throws {
-    }
+    //
+    // TODO: However, the document is not anymore saved and we would have provide custom encoders and decoders, see
+    //  for example guide on https://www.raywenderlich.com/3418439-encoding-and-decoding-in-swift
+    //  ---
+    //  Solution: Work with a custom color-class which is codable instead and revert to Foundation instead of SwiftUI
+    //  => We created the following:    struct ColorRGBA: Codable
+//    init(from decoder: Decoder) throws {
+//        elapsedTime = 0
+//        backgroundColor = Color.white
+//    }
+//
+//    // Needed, because otherwise, the following error occurs:
+//    // Type 'EmojiArtModel' does not conform to protocol 'Encodable'
+//    func encode(to encoder: Encoder) throws {
+//    }
 }

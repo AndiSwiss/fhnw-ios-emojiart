@@ -20,7 +20,6 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
         emojiArtModel.emojis
     }
     var elapsedTime: Int
-    var backgroundColor: Color
 
     var backgroundURL: URL? {
         get {
@@ -32,6 +31,21 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
         }
     }
 
+    var backgroundColor: UIColor {
+        get {
+            // Conversion from ColorRGBA to UIColor via constructor
+            UIColor(
+                    red: CGFloat(emojiArtModel.backgroundColor.r),
+                    green: CGFloat(emojiArtModel.backgroundColor.g),
+                    blue: CGFloat(emojiArtModel.backgroundColor.b),
+                    alpha: CGFloat(emojiArtModel.backgroundColor.a))
+        }
+        set {
+            // Conversion from UIColor to ColorRGBA via extension
+            emojiArtModel.backgroundColor = newValue.asColorRGBA
+        }
+    }
+
     // MARK: - Init
     init(id: UUID = UUID()) {
         self.id = id
@@ -39,7 +53,6 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
         // emojiArtModel, there will be the following error:
         //      self' used in property access '$emojiArtModel' before all stored properties are initialized
         elapsedTime = 0
-        backgroundColor = Color.white
         let userDefaultsKey = "EmojiArtDocumentViewModel.\(id.uuidString)"
         let emojiArtJson = UserDefaults.standard.data(forKey: userDefaultsKey)
         emojiArtModel = EmojiArtModel(json: emojiArtJson) ?? EmojiArtModel()

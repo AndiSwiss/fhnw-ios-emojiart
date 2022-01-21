@@ -89,7 +89,7 @@ struct EmojiArtDocumentView: View {
     }
 
     private func createBackground(geometry: GeometryProxy) -> some View {
-        document.backgroundColor.overlay(
+        Color(document.backgroundColor).overlay(
                     Group {
                         if let image = document.backgroundImage {
                             Image(uiImage: image)

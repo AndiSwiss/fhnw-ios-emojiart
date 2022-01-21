@@ -30,7 +30,7 @@ struct EmojiArtColorPicker: View {
             Form {
                 ColorPicker("Background Color", selection: $backgroundColor)
                     .onChange(of: backgroundColor) { newColor in
-                        document.backgroundColor = newColor
+                        document.backgroundColor = UIColor(newColor)
                     }
             }
         }
