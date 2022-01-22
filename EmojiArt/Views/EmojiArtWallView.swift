@@ -16,9 +16,12 @@ struct EmojiArtWallView: View {
                             .navigationTitle(store.name(for: document))
                         let backgroundImage = document.backgroundImage ?? UIImage()
                         NavigationLink(destination: destination) {
-                            Image(uiImage: backgroundImage)
-                                .resizable()
+                            Color.clear
+                                .overlay(Image(uiImage: backgroundImage)
+                                            .resizable()
+                                            .scaledToFill())
                                 .aspectRatio(1, contentMode: .fit)
+                                .clipped()
                                 .border(Color.black)
                         }
                     }
