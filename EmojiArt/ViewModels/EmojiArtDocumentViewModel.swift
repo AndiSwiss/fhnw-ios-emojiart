@@ -77,7 +77,9 @@ class EmojiArtDocumentViewModel: ObservableObject, Hashable, Equatable, Identifi
 
     // MARK: - Intents
     func addEmoji(_ emoji: String, at location: CGPoint, size: CGFloat) {
-        emojiArtModel.addEmoji(emoji, x: Int(location.x), y: Int(location.y), size: Int(size))
+        if (!emoji.isEmpty) {
+            emojiArtModel.addEmoji(emoji, x: Int(location.x), y: Int(location.y), size: Int(size))
+        }
     }
 
     private var fetchImageSink: AnyCancellable?

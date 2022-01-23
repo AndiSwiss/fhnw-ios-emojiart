@@ -12,6 +12,7 @@
 		272A67C41E1F835032372E95 /* EmojiArtWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A6A77AE2CCAC75F2884C1 /* EmojiArtWallView.swift */; };
 		272A6951785FE59B52381E03 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A6F32532E19A2D6E582F1 /* FontPicker.swift */; };
 		272A6B812B6CD390BE5F633F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A6B0D029D8AA380E376B5 /* UIColor+Extensions.swift */; };
+		DD15FC4E279D9C7300E69DF4 /* EmojiArtDocumentChooserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD15FC4D279D9C7300E69DF4 /* EmojiArtDocumentChooserTest.swift */; };
 		DEF3E4F7272AEFAB00A93527 /* EmojiArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF3E4F6272AEFAB00A93527 /* EmojiArtApp.swift */; };
 		DEF3E4FB272AEFAE00A93527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEF3E4FA272AEFAE00A93527 /* Assets.xcassets */; };
 		DEF3E4FE272AEFAE00A93527 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEF3E4FD272AEFAE00A93527 /* Preview Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		272A6F32532E19A2D6E582F1 /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		272A6FB4AF01F43BF71386D1 /* ColorRGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorRGBA.swift; sourceTree = "<group>"; };
 		272A6FBBB3B536833FBD1372 /* EmojiArtColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtColorPicker.swift; sourceTree = "<group>"; };
+		DD15FC4D279D9C7300E69DF4 /* EmojiArtDocumentChooserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentChooserTest.swift; sourceTree = "<group>"; };
 		DEF3E4F3272AEFAB00A93527 /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF3E4F6272AEFAB00A93527 /* EmojiArtApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtApp.swift; sourceTree = "<group>"; };
 		DEF3E4FA272AEFAE00A93527 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		DEF3E510272AEFAF00A93527 /* EmojiArtUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DD15FC4D279D9C7300E69DF4 /* EmojiArtDocumentChooserTest.swift */,
 				DEF3E511272AEFAF00A93527 /* EmojiArtUITests.swift */,
 				DEF3E513272AEFAF00A93527 /* EmojiArtUITestsLaunchTests.swift */,
 			);
@@ -276,6 +279,7 @@
 					};
 					DEF3E50C272AEFAF00A93527 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1320;
 						TestTargetID = DEF3E4F2272AEFAB00A93527;
 					};
 				};
@@ -364,6 +368,7 @@
 			files = (
 				DEF3E514272AEFAF00A93527 /* EmojiArtUITestsLaunchTests.swift in Sources */,
 				DEF3E512272AEFAF00A93527 /* EmojiArtUITests.swift in Sources */,
+				DD15FC4E279D9C7300E69DF4 /* EmojiArtDocumentChooserTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +616,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JMY9M4V3S6;
@@ -624,6 +630,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ch.fhnw.EmojiArtUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EmojiArt;
@@ -634,6 +641,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JMY9M4V3S6;
