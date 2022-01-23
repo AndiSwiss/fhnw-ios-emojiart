@@ -9,35 +9,19 @@ import XCTest
 @testable import EmojiArt
 
 class EmojiArtTests: XCTestCase {
-
+    var document: EmojiArtDocumentViewModel!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        document = EmojiArtDocumentViewModel()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-
-        /* Some examples:
-            XCTAssertFalse(testee.defaultPalette.isEmpty)
-            XCTAssertNotNil(actualDocument)
-            XCTAssertEqual(expectedDocument, actualDocument)
-            XCTAssertGreaterThan(0, testee.defaultPalette.count)
-            XCTAssertNoThrow(testee.addEmoji("", toPalette: testee.defaultPalette))
-
-         */
-        XCTAssertFalse(false)
+    func testAddEmoji_whenTextIsEmpty_doesNothing() throws {
+        XCTAssertEqual(document.emojis.count, 0)
+        document.addEmoji("", at: CGPoint.zero, size: 40)
+        XCTAssertEqual(document.emojis.count, 0)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
