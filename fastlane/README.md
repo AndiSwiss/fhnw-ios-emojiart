@@ -29,14 +29,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### tests_ui_launch
-
-```sh
-[bundle exec] fastlane tests_ui_launch
-```
-
-
-
 ----
 
 

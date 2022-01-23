@@ -32,8 +32,3 @@ lane :tests_ui do
   run_tests(devices: ["iPhone 13", "iPad Pro (12.9-inch) (5th generation)"],
             scheme: "All in EmojiArtUITests.swift")
 end
-
-lane :tests_ui_launch do
-  run_tests(devices: ["iPhone 13", "iPad Pro (12.9-inch) (5th generation)"],
-            scheme: "All in EmojiArtUITestsLaunchTests.swift")
-end

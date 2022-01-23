@@ -24,7 +24,7 @@ This project was created for the course [iOS](https://www.fhnw.ch/de/studium/mod
 
 Run tests with [Fastlane](https://fastlane.tools/):
 
-- There are three test lanes as described in the Fastlane [README.md](fastlane/README.md) and as shown here (excerpt from Fastfile):
+- There are two test lanes as described in the Fastlane [README.md](fastlane/README.md) and as shown here (excerpt from Fastfile):
 
   ```bash
   lane :tests do
@@ -37,14 +37,8 @@ Run tests with [Fastlane](https://fastlane.tools/):
     run_tests(devices: ["iPhone 13", "iPad Pro (12.9-inch) (5th generation)"],
               scheme: "All in EmojiArtUITests.swift")
   end
-  
-  
-  lane :tests_ui_launch do
-    run_tests(devices: ["iPhone 13", "iPad Pro (12.9-inch) (5th generation)"],
-              scheme: "All in EmojiArtUITestsLaunchTests.swift")
-  end
   ```
-
+  
 - Each test will be executed on two devices: *iPhone 13* and *iPad Pro (12.9-inch) (5th generation)*
 
 - NOTE: Sometimes, the tests cannot be executed and instead a warning is shown:
